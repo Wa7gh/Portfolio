@@ -1,23 +1,34 @@
 import React from 'react';
-import logo from './logo.svg';
+import  { useEffect, useState } from 'react';
+import One from "./One";
+import Two from "./Two"
 import './App.css';
+import {BrowserRouter as Router , Switch , Route } from "react-router-dom"
+import ReactGa from 'react-ga';
+
 
 function App() {
+
+  useEffect(()=>{
+    ReactGa.initialize('UA-180321409-1')
+
+    ReactGa.pageview(window.location.path + window.location.search)
+
+  },[])
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <a href="/One">One</a>
+        <br/>
+        <a href="/Two">two</a>
+        Hello
+        <Router>
+          <Switch>
+            <Route path="/One"><One/></Route>
+            <Route path="/Two"><Two/></Route>
+          </Switch>
+        </Router>
       </header>
     </div>
   );
